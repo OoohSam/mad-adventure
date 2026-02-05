@@ -1,10 +1,18 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { useAuth } from "./Context/AuthContext";
 
-createRoot(document.getElementById('root')).render(
+import AuthProvider from "./Context/AuthContext";
+
+import App from "./App.jsx";
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </StrictMode>,
-)
+);
+
+//the AuthProvider is placed at the highest most part of the
+//application.....
