@@ -1,5 +1,9 @@
 import React from "react";
 
-export default function Habits(){
-    return <h1>Habits</h1>
+export default function Habits() {
+  return (
+    <div className="dashboard-page">
+      <h1 className="dashboard-title">Habits</h1>
+    </div>
+  );
 }

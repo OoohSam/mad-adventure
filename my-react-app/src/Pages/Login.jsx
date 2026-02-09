@@ -14,8 +14,9 @@ export default function Login() {
   }
 
   function handleSubmit(e) {
+    console.log("Submissio" )
     e.preventDefault();
-    if (!username.trim()) {
+    if (username.trim()) {
       
       return login(username);
     }
@@ -23,15 +24,21 @@ export default function Login() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Enter your name here"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        //i will look into this later
-      ></input>
-      <button>Login</button>
-    </form>
+ <div className="login-page">
+  <form className="login-form" onSubmit={handleSubmit}>
+    <input
+      className="login-input"
+      type="text"
+      placeholder="Enter your name here"
+      value={username}
+      onChange={(e) => setUsername(e.target.value)}
+    />
+
+    <button className="login-btn" type="submit">
+      Login
+    </button>
+  </form>
+</div>
+
   );
 }

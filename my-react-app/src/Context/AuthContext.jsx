@@ -15,25 +15,26 @@ export default function AuthProvider({children}) {
     if(savedUser){
         setUser(JSON.parse(savedUser))
         console.log(
-            "The user is not Logged in"
+            "Ther is a User in the data base"
         )
     }
   },[])
 
   function login(username){
+    console.log("User is Logged In")
     const userData = {name:username}
     setUser(userData)
     localStorage.setItem("user",JSON.stringify(userData))
   }
 
-  function logOut(){
+  function logout(){
     setUser(null)
     localStorage.removeItem("user")  
     console.log("Logout pressed")
   }
 
  return(
-   <AuthContext.Provider value={{login,logOut,user,setUser}} >
+   <AuthContext.Provider value={{login,logout,user,setUser}} >
      {children}
    
    </AuthContext.Provider>  

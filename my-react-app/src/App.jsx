@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
 import MainLayout from "./Components/layout/MainLayout";
 import { useContext, StrictMode } from "react";
 import AuthProvider from "./Context/AuthContext";
@@ -18,11 +18,12 @@ function App() {
       <Routes>
         {/*Public*/}
         <Route path="/login" element={<Login />} />
+         <Route path="/" element={<Navigate to="/login" replace />} />
 
         {/*Protected*/}
         <Route element={<ProtectedRoute>  <MainLayout /> </ProtectedRoute>  }  >
           <Route path="/dashboard" element={<Dashboard/>}/>
-          <Route path="/Tasks" element={<Task/>}/>
+          <Route path="/Task" element={<Task/>}/>
           <Route path="/Habits" element={<Habits/>}/>
           <Route path="/Settings" element={<Settings/>}/>
 

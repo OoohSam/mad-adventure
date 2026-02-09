@@ -1,0 +1,499 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+.nav-bar {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #35373b;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+.nav-link.active {
+  color: #6366f1;
+}
+
+.logout-btn {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid #e0a51b;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #1f2937;
+}
+
+
+
+
+/* Page background (login only) */
+.login-page {
+  min-height: 100vh;
+  padding: 1rem; /* mobile breathing room */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(
+    at top left,
+    #2b255a,
+    #0b1220 60%
+  );
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Card */
+.login-form {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Input */
+.login-input {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  color: #f8fafc;
+  font-size: 1rem;
+}
+
+.login-input::placeholder {
+  color: #94a3b8;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+}
+
+/* Button */
+.login-btn {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  border: none;
+  border-radius: 12px;
+  padding: 0.85rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.45);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
+
+/* Larger screens refinement */
+@media (min-width: 768px) {
+  .login-form {
+    padding: 2.5rem;
+  }
+}
+
+
+
+
+/* Animation */
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.login-animate {
+  animation: fadeSlideUp 1.6s ease-out forwards;
+}
+
+
+
+
+/* NavBar */
+
+/* NAV BAR */
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(11, 18, 32, 0.75);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Inner container */
+.app-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Logo */
+.app-logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e5e7eb;
+}
+
+/* Links (desktop) */
+.app-links {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Nav links */
+.app-link {
+  text-decoration: none;
+  color: #9ca3af;
+  font-weight: 500;
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.app-link:hover {
+  color: #ffffff;
+}
+
+/* Active indicator */
+.app-link.active {
+  color: #6366f1;
+}
+
+.app-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #4f46e5);
+  border-radius: 2px;
+}
+
+/* Logout button */
+.app-logout {
+  margin-left: 1rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f9fafb;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.app-logout:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Hamburger */
+.app-menu-btn {
+  display: none;
+  margin-left: auto;
+  font-size: 1.6rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .app-menu-btn {
+    display: block;
+  }
+
+  .app-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(11, 18, 32, 0.95);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.5rem 0;
+    display: none;
+  }
+
+  .app-links.open {
+    display: flex;
+  }
+}
+
+/* .............................................................................................................. */
+/* .............................................................................................................. */
+/* .............................................................................................................. */
+
+/* PAGE WRAPPER */
+.future-page {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(
+    at top left,
+    #2b255a,
+    #0b1220 60%
+  );
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FUTURE SHAPES LAYER */
+.future-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Glowing orbs */
+.future-bg::before,
+.future-bg::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.45;
+}
+
+.future-bg::before {
+  background: #6366f1;
+  top: -120px;
+  left: -120px;
+}
+
+.future-bg::after {
+  background: #4f46e5;
+  bottom: -140px;
+  right: -140px;
+}
+
+/* Subtle grid */
+.future-bg {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px
+    );
+  background-size: 60px 60px;
+}
+
+/* CENTER CONTENT */
+.future-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* TITLE */
+.future-title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #e5e7eb;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #c7d2fe
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 0 30px rgba(99, 102, 241, 0.35);
+}
+
+/* .............................................................................................................. */
+/* .............................................................................................................. */
+/* .............................................................................................................. */
+
+
+/* Page background */
+.dashboard-page {
+  min-height: 100vh;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(at top left, #2b255a, #0b1220 60%);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  flex-direction: column;
+  gap: 16px;
+  /* max-width: 500px; */
+  margin: 0 auto;
+  
+}
+
+/* Glassy card */
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+/* Title */
+.dashboard-title {
+  color: #f8fafc;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+/* Button */
+.dashboard-btn {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  border: none;
+  border-radius: 12px;
+  padding: 0.85rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dashboard-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.45);
+}
+
+.dashboard-btn:active {
+  transform: translateY(0);
+}
+
+
+
+/* .............................................................................................................. */
+/* .............................................................................................................. */
+/* .............................................................................................................. */
+
+
+
+
+
+/* List container */
+.task-list {
+   list-style: none;
+   padding: 0;
+   margin: 20px 0;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+ }
+
+ /* Individual task */
+ .task-item {
+   background: #ffffff;
+   border-radius: 12px;
+   padding: 14px 16px;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+   transition: all 0.25s ease;
+   display: flex;
+   align-items: center;
+   gap: 10px;
+ }
+
+ /* Hover effect */
+ .task-item:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+ }
+
+ /* Layout inside item */
+ .task-item label {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   cursor: pointer;
+ }
+
+ /* Checkbox */
+ .task-item input[type="checkbox"] {
+   width: 18px;
+   height: 18px;
+   cursor: pointer;
+ }
+
+ /* Task text */
+ .task-item span {
+   font-size: 15px;
+   color: #111827;
+   transition: color 0.2s ease;
+ }
+
+ /* Completed state */
+ .task-item.completed {
+   opacity: 0.6;
+   border-left: 4px solid #22c55e;
+   transform: scale(0.98);
+ }
+
+
+
+ .task-item.completed span {
+   text-decoration: line-through;
+   color: #9ca3af;
+ }
+
+
+
+
