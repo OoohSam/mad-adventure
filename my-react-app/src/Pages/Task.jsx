@@ -47,7 +47,23 @@ export default function Task() {
 
 
 
-function saveActivity(x){
+function startEditing(task){
+  SetEditTask(task.id)
+  setActivity(task.activity)
+
+}
+
+function saveActivity(id){
+  setTask(
+    tasks.map( task=>{
+      task.id === id ? {...task,activity:editActivity}:task
+    })
+  )
+
+
+}
+
+function deleteActivity(){
 
 }
 
@@ -60,20 +76,20 @@ function saveActivity(x){
     <div className="dashboard-page">
       <form onSubmit={handleSubmit}>
  
-
         <input
           className="login-input"
           type="text"
           value={activity}
           placeholder="Add a new Adventure..."
           onChange={(e) => setActivity(e.target.value)}
-        />
+          />
         <button className="login-btn" type="submit">
           <i className="bi bi-box-arrow-in-left"></i>
         </button>
       </form>
 
       <ul className="task-list">
+          {editTask.id === task.id }
         {tasks.map((task) => {
           return (
             <li
@@ -95,7 +111,7 @@ function saveActivity(x){
                   
                 </button>
                 <ul className="dropdown-menu">
-                  <li onClick={()=> saveActivity(task)}>
+                  <li onClick={()=> startEditing(task)}>
                     <a className="dropdown-item edit" href="#">
                       Edit
                     </a>
