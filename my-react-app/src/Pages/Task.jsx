@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import Blackie from "./blackdrop";
 
 export default function Task() {
-  const [tasks, setTask] = useState([]);
+  const [tasks, setTask] = useState( 
+    ()=>{
+      const saved = localStorage.getItem("tasks");
+      return saved ? JSON.parse(saved) : []
+    }
+   );
   const [activity, setActivity] = useState("");
-  // console.log("his");
-  //Editting it now
+ 
+
+  useEffect(()=>localStorage.setItem("tasks",JSON.stringify(tasks)),[tasks])
 
   const [editTasksID, setEditTasksID] = useState(null);
   const [editActivity, setEditActivity] = useState("");
@@ -20,7 +26,9 @@ export default function Task() {
       activity: activity,
       isCompleted: false,
     };
+
     setTask([...tasks, newTask]);
+
 
     setActivity("");
     console.log(tasks);
@@ -32,6 +40,7 @@ export default function Task() {
         task.id === id ? { ...task, isCompleted: !task.isCompleted } : task,
       ),
     );
+  
   }
 
   function deleteTask(id) {
@@ -53,9 +62,13 @@ export default function Task() {
   function saveEdit(id) {
     setTask(
       tasks.map((task) => {
-        task.id === id ? { ...task, activity: editActivity } : task;
+      return  task.id === id ? { ...task, activity: editActivity } : task;
       }),
     );
+
+    setEditTasksID(null)
+    setEditActivity("")
+
   }
 
   function deleteActivity() {
