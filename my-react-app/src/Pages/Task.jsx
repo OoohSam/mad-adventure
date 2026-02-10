@@ -50,16 +50,18 @@ export default function Task() {
     setEditActivity(task.activity);
   }
 
-  function saveEdit() {
+  function saveEdit(id) {
     setTask(
       tasks.map((task) => {
-        task.id === setEditTasksID ? { ...task, activity: editActivity } : task;
+        task.id === id ? { ...task, activity: editActivity } : task;
       }),
     );
   }
 
   function deleteActivity() {
     console.log("Delete activity has been pressed ");
+    setEditActivity("" )
+    setEditTasksID(null)
   }
 
   return (
@@ -80,66 +82,62 @@ export default function Task() {
       <ul className="task-list">
         {tasks.map((task) => {
           return (
-           
-
-
- <li
-            key={task.id}
-            className={task.isCompleted ? `task-item complete` : `task-item`}
-          >
-            {editTasksID === task.id ? (
-              <>
-                <input
-                  value={editActivity}
-                  onChange={(e) => setEditActivity(e.target.value)}
-                  autoFocus
-                />
-
-                <button onClick={() => saveEdit(task.id)}>Save</button>
-                <button 
-                // onClick={cancelEdit}
-                >Cancel</button>
-              </>
-            ) : (
-              <>
-                <label>
+            <li
+              key={task.id}
+              // className={task.isCompleted ? `task-item complete` : `task-item`}
+              className="task-item complete"
+            >
+              {editTasksID === task.id ? (
+                <>
                   <input
-                    type="checkbox"
-                    onChange={() => toggleTask(task.id)}
+                    value={editActivity}
+                    onChange={(e) => setEditActivity(e.target.value)}
+                    autoFocus
                   />
-                </label>
-                <span>{task.activity}</span>
 
-                <div className="dropdown">
+                  <button onClick={() => saveEdit(task.id)}>Save</button>
                   <button
-                    className="btn btn-secondary dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  ></button>
-                  <ul className="dropdown-menu">
-                    <li onClick={() => startEdit(task)}>
-                      <a className="dropdown-item edit" href="#">
-                        Edit
-                      </a>
-                    </li>
-                    <li onClick={() => deleteTask(task.id)}>
-                      <a className="dropdown-item delete" href="#">
-                        Delete
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </>
-            )}
-          </li>
+                  onClick={deleteActivity}
+                  >
+                    Cancel
+                  </button>
+                </>
+              ) : (
+                <>
+                  <label>
+                    <input
+                      type="checkbox"
+                      onChange={() => toggleTask(task.id)}
+                    />
+                  </label>
+                  <span>{task.activity}</span>
 
-
-
+                  <div className="dropdown">
+                    <button
+                      className="btn btn-secondary dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    ></button>
+                    <ul className="dropdown-menu">
+                      <li onClick={() => startEdit(task)}>
+                        <a className="dropdown-item edit" href="#">
+                          Edit
+                        </a>
+                      </li>
+                      <li onClick={() => deleteTask(task.id)}>
+                        <a className="dropdown-item delete" href="#">
+                          Delete
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </>
+              )}
+            </li>
           );
         })}
       </ul>
     </div>
   );
 }
-
