@@ -6,8 +6,9 @@ export default function Task() {
   const [activity, setActivity] = useState("");
   // console.log("his");
   //Editting it now
-  const[editTask,SetEditTask] = useState(null);
-  const[editActivity,setEditActivity] = useState("")
+
+  const [editTasksID, setEditTasksID] = useState(null);
+  const [editActivity, setEditActivity] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -26,7 +27,6 @@ export default function Task() {
   }
 
   function toggleTask(id) {
-
     setTask(
       tasks.map((task) =>
         task.id === id ? { ...task, isCompleted: !task.isCompleted } : task,
@@ -34,104 +34,112 @@ export default function Task() {
     );
   }
 
- 
-
-  function deleteTask(id){
- console.log(id)
+  function deleteTask(id) {
+    console.log(id);
     setTask(tasks.filter((task) => task.id != id));
     console.log(tasks);
   }
 
-//The Edit function
+  //The Edit function
+  //the Edit function is started when you press the edit button\
+  //We want to setstate of that which we want to change
+  //the task is editted one at a go
 
+  function startEdit(task) {
+    setEditTasksID(task.id);
+    setEditActivity(task.activity);
+  }
 
+  function saveEdit() {
+    setTask(
+      tasks.map((task) => {
+        task.id === setEditTasksID ? { ...task, activity: editActivity } : task;
+      }),
+    );
+  }
 
-
-function startEditing(task){
-  SetEditTask(task.id)
-  setActivity(task.activity)
-
-}
-
-function saveActivity(id){
-  setTask(
-    tasks.map( task=>{
-      task.id === id ? {...task,activity:editActivity}:task
-    })
-  )
-
-
-}
-
-function deleteActivity(){
-
-}
-
-
-
-
-
+  function deleteActivity() {
+    console.log("Delete activity has been pressed ");
+  }
 
   return (
     <div className="dashboard-page">
       <form onSubmit={handleSubmit}>
- 
         <input
           className="login-input"
           type="text"
           value={activity}
           placeholder="Add a new Adventure..."
           onChange={(e) => setActivity(e.target.value)}
-          />
+        />
         <button className="login-btn" type="submit">
           <i className="bi bi-box-arrow-in-left"></i>
         </button>
       </form>
 
       <ul className="task-list">
-          {editTask.id === task.id }
         {tasks.map((task) => {
           return (
-            <li
-              key={task.id}
-              className={task.isCompleted ? `task-item complete` : `task-item`}
-            >
-              <label>
-                <input type="checkbox" onChange={() => toggleTask(task.id)} />
-              </label>
-              <span>{task.activity}</span>
+           
 
-              <div className="dropdown">
-                <button
-                  className="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  
-                </button>
-                <ul className="dropdown-menu">
-                  <li onClick={()=> startEditing(task)}>
-                    <a className="dropdown-item edit" href="#">
-                      Edit
-                    </a>
-                  </li>
-                  <li onClick={()=> deleteTask(task.id)} >
-                    <a className="dropdown-item delete" href="#">
-                      Delete
-                    </a>
-                  </li>
-               
-                </ul>
-              </div>
 
-              {/* <button onClick={() => deleteTask(task.id)} className="login-btn">
-                <i className="bi bi-x-lg"></i>
-              </button> */}
-            </li>
+ <li
+            key={task.id}
+            className={task.isCompleted ? `task-item complete` : `task-item`}
+          >
+            {editTasksID === task.id ? (
+              <>
+                <input
+                  value={editActivity}
+                  onChange={(e) => setEditActivity(e.target.value)}
+                  autoFocus
+                />
+
+                <button onClick={() => saveEdit(task.id)}>Save</button>
+                <button 
+                // onClick={cancelEdit}
+                >Cancel</button>
+              </>
+            ) : (
+              <>
+                <label>
+                  <input
+                    type="checkbox"
+                    onChange={() => toggleTask(task.id)}
+                  />
+                </label>
+                <span>{task.activity}</span>
+
+                <div className="dropdown">
+                  <button
+                    className="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  ></button>
+                  <ul className="dropdown-menu">
+                    <li onClick={() => startEdit(task)}>
+                      <a className="dropdown-item edit" href="#">
+                        Edit
+                      </a>
+                    </li>
+                    <li onClick={() => deleteTask(task.id)}>
+                      <a className="dropdown-item delete" href="#">
+                        Delete
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </>
+            )}
+          </li>
+
+
+
           );
         })}
       </ul>
     </div>
   );
 }
+
